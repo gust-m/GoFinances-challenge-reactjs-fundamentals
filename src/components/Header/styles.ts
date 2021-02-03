@@ -17,6 +17,8 @@ export const Container = styled.div<ContainerProps>`
     justify-content: space-between;
 
     nav {
+      display: flex;
+
       a {
         color: #fff;
         text-decoration: none;
@@ -32,5 +34,16 @@ export const Container = styled.div<ContainerProps>`
         }
       }
     }
+  }
+
+  .selected {
+    display: flex;
+
+    margin-left: 1px;
+    margin-top: 5px;
+
+    width: 73px;
+    height: 2px;
+    background-color: #FF827C;
   }
 `;
