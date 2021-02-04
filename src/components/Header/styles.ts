@@ -44,6 +44,6 @@ export const Container = styled.div<ContainerProps>`
 
     width: 73px;
     height: 2px;
-    background-color: #FF827C;
+    background-color: #ff827c;
   }
 `;
