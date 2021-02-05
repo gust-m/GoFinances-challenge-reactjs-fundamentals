@@ -19,7 +19,7 @@ const Header: React.FC<HeaderProps> = ({ size = 'large' }: HeaderProps) => {
   const [buttons, setButtons] = useState(buttonsDefault);
   const url = window.location.pathname;
   const setSelected = (): void => {
-    setButtons(buttons.map(i => ({ ...i, isActive: i.route === url })));
+    setButtons(buttons.map(button => ({ ...button, isActive: button.route === url })));
   };
 
   return (
@@ -27,10 +27,10 @@ const Header: React.FC<HeaderProps> = ({ size = 'large' }: HeaderProps) => {
       <header>
         <img src={Logo} alt="GoFinances" />
         <nav>
-          {buttons.map(i => (
-            <Link key={i.title} to={i.route} onClick={setSelected}>
-              {i.title}
-              <p className={i.route === url ? 'selected' : ''} />
+          {buttons.map(button => (
+            <Link key={button.title} to={button.route} onClick={setSelected}>
+              {button.title}
+              <p className={button.route === url ? 'selected' : ''} />
             </Link>
           ))}
         </nav>
