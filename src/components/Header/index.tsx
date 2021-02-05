@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Container } from './styles';
 
@@ -10,37 +10,29 @@ interface HeaderProps {
   size?: 'small' | 'large';
 }
 
-interface RouteParams {
-  route: string;
-}
+const buttonsDefault = [
+  { title: 'Listagem', route: '/', isActive: true },
+  { title: 'Importar', route: '/import', isActive: false },
+];
 
 const Header: React.FC<HeaderProps> = ({ size = 'large' }: HeaderProps) => {
-  const [currentRoute, setCurrentRoute] = useState('selected');
-
-  const { params } = useRouteMatch<RouteParams>();
-
-  useEffect(() => {
-    // eslint-disable-next-line no-unused-expressions
-    currentRoute === 'selected'
-      ? setCurrentRoute('')
-      : setCurrentRoute('selected');
-
-    console.log(currentRoute);
-  }, [params.route]);
+  const [buttons, setButtons] = useState(buttonsDefault);
+  const url = window.location.pathname;
+  const setSelected = (): void => {
+    setButtons(buttons.map(i => ({ ...i, isActive: i.route === url })));
+  };
 
   return (
     <Container size={size}>
       <header>
         <img src={Logo} alt="GoFinances" />
         <nav>
-          <Link to="/">
-            Listagem
-            <p id="1" className={currentRoute} />
-          </Link>
-          <Link to="/import">
-            Importar
-            <p id="2" />
-          </Link>
+          {buttons.map(i => (
+            <Link key={i.title} to={i.route} onClick={setSelected}>
+              {i.title}
+              <p className={i.route === url ? 'selected' : ''} />
+            </Link>
+          ))}
         </nav>
       </header>
     </Container>
